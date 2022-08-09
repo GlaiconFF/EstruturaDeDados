@@ -13,13 +13,22 @@
 //selection sort
 
 #include <stdlib.h>
+#include <stdio.h>  
 #include <string.h>
+#define T 10
 
 int main()
 {
-    int vetor[8] = {7, 3, 0, 1, 3, 8, 2, 9};
+    int vetor[T], troca = 0, var = 0, comp = 0;
 
-    bubble(vetor, 8);   
+    for(int i = 0; i < T; i++)
+    {
+        vetor[i] = rand() % 1000;
+    } 
+
+    printVector(vetor);
+    printf("\n");
+    bubble(vetor, T);   
 
     printVector(vetor);
 
@@ -51,7 +60,7 @@ void bubble(int vetor[], int size)
 
 void printVector(const int *vetor)
 {
-    for(int i = 0; i < 8; i++)
+    for(int i = 0; i < T; i++)
     {
         printf("Vetor[%d] = %d\n", i, vetor[i]);
     }
