@@ -14,18 +14,14 @@
 
 #include <stdlib.h>
 #include <string.h>
-#define TAM 8
 
 int main()
 {
-    int vetor[TAM] = {7, 3, 0, 1, 3, 8, 2, 9};
+    int vetor[8] = {7, 3, 0, 1, 3, 8, 2, 9};
 
-    bubble(vetor, 8);
+    bubble(vetor, 8);   
 
-    for(int i = 0; i < 8; i++)
-        {
-            printf("vetor[%d]", vetor[i]);
-        }
+    printVector(vetor);
 
     return 0;
 }
@@ -55,15 +51,8 @@ void bubble(int vetor[], int size)
 
 void printVector(const int *vetor)
 {
-
+    for(int i = 0; i < 8; i++)
+    {
+        printf("Vetor[%d] = %d\n", i, vetor[i]);
+    }
 }
-
-
-
-
-
-
-
-
-
-
