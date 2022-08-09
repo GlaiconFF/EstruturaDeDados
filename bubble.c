@@ -14,23 +14,34 @@
 
 #include <stdlib.h>
 #include <stdio.h>  
-#include <string.h>
-#define T 10
+#include <time.h>
+#define T 50000
 
 int main()
 {
-    int vetor[T], troca = 0, var = 0, comp = 0;
+    double tempo = 0.0;
+    clock_t inicio = clock();
+
+    int vetor[T], troca, var, comp;
 
     for(int i = 0; i < T; i++)
     {
-        vetor[i] = rand() % 100;
+        vetor[i] = rand() % 50000;
     } 
 
-    printVector(vetor);
-    printf("\n");
-    bubble(vetor, T);  
+    //printVector(vetor);
 
-    printVector(vetor);
+    //printf("\n");
+
+    troca = bubble(vetor, T);  
+
+    //printVector(vetor);
+    
+    printf("Numero de trocas: %d\n", troca);
+
+    clock_t final = clock();
+    tempo += (double)(final - inicio) / CLOCKS_PER_SEC;
+    printf("O tempo decorrido foi de %f segundos", tempo);
 
     return 0;
 }
@@ -46,6 +57,7 @@ void swap(int *a, int *b)
 
 void bubble(int vetor[], int size)
 {
+    int k = 1;
     for (int i = 0; i < size-1; i++)
     {
         for(int j = 0; j < size-1; j++)
@@ -53,9 +65,11 @@ void bubble(int vetor[], int size)
             if(vetor[j] > vetor[j+1])
             {   
                 swap(&vetor[j], &vetor[j+1]);
+                k++;
             }  
         }
     }
+    return k;
 }
 
 void printVector(const int *vetor)
