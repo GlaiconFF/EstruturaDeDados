@@ -23,12 +23,12 @@ int main()
 
     for(int i = 0; i < T; i++)
     {
-        vetor[i] = rand() % 1000;
+        vetor[i] = rand() % 100;
     } 
 
     printVector(vetor);
     printf("\n");
-    bubble(vetor, T);   
+    bubble(vetor, T);  
 
     printVector(vetor);
 
