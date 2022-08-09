@@ -14,27 +14,34 @@
 
 #include <stdlib.h>
 #include <stdio.h>  
-#include <string.h>
-#define T 10
+#include <time.h>
+#define T 50000
 
 int main()
 {
-    int vetor[T], troca, comp;
+    int vetor[T], troca, comp, var, cloc;
 
+    double tempo = 0.0;
+    clock_t inicio = clock();
+    
     for(int i = 0; i < T; i++)
     {
-        vetor[i] = rand() % 10;
+        vetor[i] = rand() % 500000;
     } 
 
-    printVector(vetor);
-    printf("\n");
+    //printVector(vetor);
 
-    
-    troca, comp = selection(vetor, T);
-    
+    //printf("\n");
+
+    troca = selection(vetor, T);
+
     printVector(vetor);
 
-    printf("%d, %d\n", troca, comp);
+    printf("Numero de trocas: %d\n", troca);
+
+    clock_t final = clock();
+    tempo += (double)(final - inicio) / CLOCKS_PER_SEC;
+    printf("O tempo decorrido foi de %f segundos", tempo);
 
     return 0;
 }
@@ -50,7 +57,8 @@ void swap(int *a, int *b)
 
 int selection(int vetor[], int size)
 {
-    int k = 0, l = 0;
+
+    int k = 0;
 
         for(int i = 0; i < T; i++)
         {
@@ -67,10 +75,9 @@ int selection(int vetor[], int size)
             {
                 swap(&vetor[menor], &vetor[i]);
                 k++;
-                l++;
             }   
         }
-        return (k, l);
+    return (k);
 }
 
 void printVector(const int *vetor)
