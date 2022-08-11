@@ -22,22 +22,18 @@ int main()
     double tempo = 0.0;
     clock_t inicio = clock();
 
-    int vetor[T], troca, var, comp;
+    int vetor[T], troca, var;
+    unsigned long int comp;
 
     for(int i = 0; i < T; i++)
     {
         vetor[i] = rand() % 50000;
     } 
 
-    //printVector(vetor);
-
-    //printf("\n");
-
-    troca = bubble(vetor, T);  
-
-    //printVector(vetor);
+    bubble(vetor, T, &troca, &comp); 
     
     printf("Numero de trocas: %d\n", troca);
+    printf("Numero de comparacoes: %ld\n", comp);
 
     clock_t final = clock();
     tempo += (double)(final - inicio) / CLOCKS_PER_SEC;
@@ -55,9 +51,11 @@ void swap(int *a, int *b)
     *b = aux;
 }
 
-void bubble(int vetor[], int size)
+void bubble(int vetor[], int size, int *troca, unsigned long int *comp)
 {
-    int k = 1;
+    int k = 0;
+    unsigned long int l = 0;
+
     for (int i = 0; i < size-1; i++)
     {
         for(int j = 0; j < size-1; j++)
@@ -66,10 +64,12 @@ void bubble(int vetor[], int size)
             {   
                 swap(&vetor[j], &vetor[j+1]);
                 k++;
-            }  
+            }
+            l++;
         }
     }
-    return k;
+    *troca = k;
+    *comp = l;
 }
 
 void printVector(const int *vetor)
