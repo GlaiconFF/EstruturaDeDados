@@ -19,25 +19,21 @@
 
 int main()
 {
-    int vetor[T], troca, comp, var, cloc;
-
     double tempo = 0.0;
     clock_t inicio = clock();
+
+    int vetor[T], troca, var;
+    long int comp;
     
     for(int i = 0; i < T; i++)
     {
-        vetor[i] = rand() % 500000;
+        vetor[i] = rand() % 50000;
     } 
 
-    //printVector(vetor);
-
-    //printf("\n");
-
-    troca = selection(vetor, T);
-
-    printVector(vetor);
+    selection(vetor, T, &troca, &comp); 
 
     printf("Numero de trocas: %d\n", troca);
+    printf("Numero de comparacoes: %d\n", comp);
 
     clock_t final = clock();
     tempo += (double)(final - inicio) / CLOCKS_PER_SEC;
@@ -55,29 +51,32 @@ void swap(int *a, int *b)
     *b = aux;
 }
 
-int selection(int vetor[], int size)
+void selection(int vetor[], int size, int *troca, long int *comp)
 {
-
     int k = 0;
+    long int l = 0;
+    for(int i = 0; i < T; i++)
+    {
+        int menor = i;
 
-        for(int i = 0; i < T; i++)
+        for(int j = i; j < T; j++)
         {
-            int menor = i;
-
-            for(int j = i; j < T; j++)
-            {
-                if(vetor[j] < vetor[menor])
-                {   
-                    menor = j;
-                }  
-            }
-            if(vetor[menor] < vetor[i])
-            {
-                swap(&vetor[menor], &vetor[i]);
-                k++;
-            }   
+            if(vetor[j] < vetor[menor])
+            {   
+                menor = j;
+                l++;
+            } 
         }
-    return (k);
+
+        if(vetor[menor] < vetor[i])
+        {
+            swap(&vetor[menor], &vetor[i]);
+            k++; 
+        }
+        
+    }
+    *troca = k;
+    *comp = l;
 }
 
 void printVector(const int *vetor)
