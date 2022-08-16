@@ -45,7 +45,7 @@ int capacity(const FloatVector *vector){
 float at(const FloatVector *vector, int pos){
     if(pos < 0 || pos >= vector->size){
         fprintf(stderr, "Error: Invalid position!\n");
-        fprintf(stderr, "Error: Index [%d] is out of bounds");
+        fprintf(stderr, "Error: Index [%d] is out of bounds", pos);
         exit(EXIT_FAILURE);
     }
     
@@ -56,6 +56,11 @@ float get(const FloatVector *vector, int index){
     return vector->data[index];
 }
 
+bool _isFull(const FloatVector *vector)
+{
+    return vector->size == vector->capacity;
+}
+
 void append(FloatVector *vector, float n){
     if(_isFull(vector)){
         fprintf(stderr, "Error: Vector in append!\nVector is full!");
@@ -64,6 +69,5 @@ void append(FloatVector *vector, float n){
     vector->data[vector->size++] = n;
 }   
 
-void print(const FloatVector *vector){
-    
-}
+//void print(const FloatVector *vector){}
+
