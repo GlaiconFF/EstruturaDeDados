@@ -1,7 +1,33 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#define T 8
+#include <time.h>
+#define T 10
+
+int main (){
+
+    double tempo = 0.0;
+    clock_t inicio = clock();
+
+    int arr[T];
+
+    for(int i = 0; i < T; i++)
+    {
+        arr[i] = rand() % 100;
+    } 
+
+    //printVector(arr);
+    //printf("\n");
+
+    mergesort(arr, 0, T-1);
+
+    printVector(arr);
+
+    clock_t final = clock();
+    tempo += (double)(final - inicio) / CLOCKS_PER_SEC;
+    printf("O tempo decorrido foi de %f segundos", tempo);
+    
+    return 0;
+}
 
 int mergesort(int arr[], int inicio, int fim)
 {
@@ -38,10 +64,14 @@ void merge(int arr[], int inicio, int meio, int fim)
         {
             arr[k] = L[i];
             i++;
-        } else {
-                    arr[k] = R[j];
-                    j++;
-               }
+        }
+        
+        else
+        {
+            arr[k] = R[j];
+            j++;
+        }
+
         k++;
     }
 
@@ -67,18 +97,4 @@ void printVector(const int *arr)
     {
         printf("Vetor[%d] = %d\n", i, arr[i]);
     }
-}
-
-int main (){
-
-    int arr[T] = {3, 0, 7, 1, 5, 2, 4, 6};
-
-    printVector(arr);
-    printf("\n");
-
-    mergesort(arr, 0, T-1);
-
-    printVector(arr);
-    
-    return 0;
 }
