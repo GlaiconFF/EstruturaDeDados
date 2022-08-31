@@ -1,17 +1,3 @@
-//qtd.trocas
-//qtd.variacao
-//qtd.comparacao
-//tempo.execucao
-
-//calcular com vetor de 50k, 100k e 500k
-
-//ordenacao.c
-//ordenacao.h
-
-//random number
-//bubble sort
-//selection sort
-
 #include <stdlib.h>
 #include <stdio.h>  
 #include <time.h>
@@ -22,18 +8,18 @@ int main()
     double tempo = 0.0;
     clock_t inicio = clock();
 
-    int vetor[T], troca, var;
-    unsigned long int comp;
+    int vetor[T];
+    unsigned long int comp, troca;
 
     for(int i = 0; i < T; i++)
     {
-        vetor[i] = rand() % 50000;
+        vetor[i] = rand() % T;
     } 
 
     bubble(vetor, T, &troca, &comp); 
     
-    printf("Numero de trocas: %d\n", troca);
-    printf("Numero de comparacoes: %ld\n", comp);
+    printf("Numero de trocas: %u\n", troca);
+    printf("Numero de comparacoes: %u\n", comp);
 
     clock_t final = clock();
     tempo += (double)(final - inicio) / CLOCKS_PER_SEC;
@@ -41,8 +27,6 @@ int main()
 
     return 0;
 }
-
-//salvar em arquivo - github
 
 void swap(int *a, int *b)
 {
@@ -53,8 +37,7 @@ void swap(int *a, int *b)
 
 void bubble(int vetor[], int size, int *troca, unsigned long int *comp)
 {
-    int k = 0;
-    unsigned long int l = 0;
+    unsigned long int k = 0, l = 0;
 
     for (int i = 0; i < size-1; i++)
     {
