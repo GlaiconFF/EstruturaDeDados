@@ -1,10 +1,3 @@
-//qtd.trocas
-//qtd.variacao
-//qtd.comparacao
-//tempo.execucao
-
-//calcular com vetor de 50k, 100k e 500k
-
 #include <stdlib.h>
 #include <stdio.h>  
 #include <time.h>
@@ -15,26 +8,18 @@ int main()
     double tempo = 0.0;
     clock_t inicio = clock();
 
-    int vetor[T], troca = 0, var, comp;
+    int vetor[T];
+    unsigned long int comp, troca;
 
     for(int i = 0; i < T; i++)
     {
-        vetor[i] = rand() % 50000;
+        vetor[i] = rand() % T;
     } 
 
-    //printVector(vetor);
-
-    //printf("\n");
-    printVector(vetor);
-    printf("\n");
     insertion(vetor, T, &troca, &comp); 
-
-    //troca = bubble(vetor, T, troca);
-
-    //printVector(vetor);
     
-    printf("Numero de trocas: %d\n", troca);
-    printf("Numero de comparacoes: %d\n", comp);
+    printf("Numero de trocas: %u\n", troca);
+    printf("Numero de comparacoes: %u\n", comp);
 
     clock_t final = clock();
     tempo += (double)(final - inicio) / CLOCKS_PER_SEC;
@@ -42,8 +27,6 @@ int main()
 
     return 0;
 }
-
-//salvar em arquivo - github
 
 void swap(int *a, int *b)
 {
@@ -54,14 +37,13 @@ void swap(int *a, int *b)
 
 void insertion(int vetor[], int size, int *troca, int *comp)
 {
-    int k = 0, l = 0, j, e;
+    int j, e;
+    unsigned long int k = 0, l = 0;
     
     for (int i = 1; i < size; i++)
     {
         e = vetor[i];
         j = i - 1;
-
-        //while (j >= 0 && vetor[j] > e)
 
         while (vetor[j] > e)
         {
@@ -72,8 +54,6 @@ void insertion(int vetor[], int size, int *troca, int *comp)
         vetor[j + 1] = e; 
         l++;
     }
-        printVector(vetor);
-        printf("\n");
     
     *troca = k;
     *comp = l;
