@@ -1,17 +1,3 @@
-//qtd.trocas
-//qtd.variacao
-//qtd.comparacao
-//tempo.execucao
-
-//calcular com vetor de 50k, 100k e 500k
-
-//ordenacao.c
-//ordenacao.h
-
-//random number
-//bubble sort
-//selection sort
-
 #include <stdlib.h>
 #include <stdio.h>  
 #include <time.h>
@@ -22,18 +8,18 @@ int main()
     double tempo = 0.0;
     clock_t inicio = clock();
 
-    int vetor[T], troca, var;
-    long int comp;
-    
+    int vetor[T];
+    unsigned long int comp, troca;
+
     for(int i = 0; i < T; i++)
     {
-        vetor[i] = rand() % 50000;
+        vetor[i] = rand() % T;
     } 
 
-    selection(vetor, T, &troca, &comp); 
-
-    printf("Numero de trocas: %d\n", troca);
-    printf("Numero de comparacoes: %d\n", comp);
+    insertion(vetor, T, &troca, &comp); 
+    
+    printf("Numero de trocas: %u\n", troca);
+    printf("Numero de comparacoes: %u\n", comp);
 
     clock_t final = clock();
     tempo += (double)(final - inicio) / CLOCKS_PER_SEC;
@@ -42,8 +28,6 @@ int main()
     return 0;
 }
 
-//salvar em arquivo - github
-
 void swap(int *a, int *b)
 {
     int aux = *a;
@@ -51,30 +35,26 @@ void swap(int *a, int *b)
     *b = aux;
 }
 
-void selection(int vetor[], int size, int *troca, long int *comp)
+void insertion(int vetor[], int size, int *troca, int *comp)
 {
-    int k = 0;
-    long int l = 0;
-    for(int i = 0; i < T; i++)
+    int j, e;
+    unsigned long int k = 0, l = 0;
+    
+    for (int i = 1; i < size; i++)
     {
-        int menor = i;
+        e = vetor[i];
+        j = i - 1;
 
-        for(int j = i; j < T; j++)
+        while (vetor[j] > e)
         {
-            if(vetor[j] < vetor[menor])
-            {   
-                menor = j;
-                l++;
-            } 
+            swap(&vetor[j], &vetor[j+1]);
+            k++;
+            j--;
         }
-
-        if(vetor[menor] < vetor[i])
-        {
-            swap(&vetor[menor], &vetor[i]);
-            k++; 
-        }
-        
+        vetor[j + 1] = e; 
+        l++;
     }
+    
     *troca = k;
     *comp = l;
 }
