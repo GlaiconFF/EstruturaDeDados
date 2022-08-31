@@ -1,26 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#define T 10
+#define T 50000
 
 int main (){
 
     double tempo = 0.0;
     clock_t inicio = clock();
 
-    int arr[T];
+    int arr[T], troca = 0, var, comp;
 
     for(int i = 0; i < T; i++)
     {
         arr[i] = rand() % 100;
     } 
 
-    //printVector(arr);
-    //printf("\n");
-
     mergesort(arr, 0, T-1);
-
-    printVector(arr);
 
     clock_t final = clock();
     tempo += (double)(final - inicio) / CLOCKS_PER_SEC;
@@ -56,8 +51,9 @@ void merge(int arr[], int inicio, int meio, int fim)
     {
         R[j] = arr[meio + 1 + j];
     }
-    
+
     int i = 0, j = 0, k = inicio;
+    
     while(i < n1 && j < n2)
     {
         if(L[i] <= R[j])
@@ -80,6 +76,7 @@ void merge(int arr[], int inicio, int meio, int fim)
         arr[k] = L[i];
         i++;
         k++;
+
     }
 
     while( j < n2)
@@ -88,7 +85,6 @@ void merge(int arr[], int inicio, int meio, int fim)
         j++;
         k++;
     }
-    
 }
 
 void printVector(const int *arr)
