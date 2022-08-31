@@ -10,14 +10,14 @@ int main()
 
     int vetor[T];
     unsigned long int comp, troca;
-
+    
     for(int i = 0; i < T; i++)
     {
         vetor[i] = rand() % T;
     } 
 
-    insertion(vetor, T, &troca, &comp); 
-    
+    selection(vetor, T, &troca, &comp); 
+
     printf("Numero de trocas: %u\n", troca);
     printf("Numero de comparacoes: %u\n", comp);
 
@@ -35,26 +35,30 @@ void swap(int *a, int *b)
     *b = aux;
 }
 
-void insertion(int vetor[], int size, int *troca, int *comp)
+void selection(int vetor[], int size, int *troca, long int *comp)
 {
-    int j, e;
     unsigned long int k = 0, l = 0;
-    
-    for (int i = 1; i < size; i++)
-    {
-        e = vetor[i];
-        j = i - 1;
 
-        while (vetor[j] > e)
+    for(int i = 0; i < T; i++)
+    {
+        int menor = i;
+
+        for(int j = i; j < T; j++)
         {
-            swap(&vetor[j], &vetor[j+1]);
-            k++;
-            j--;
+            if(vetor[j] < vetor[menor])
+            {   
+                menor = j;
+                l++;
+            } 
         }
-        vetor[j + 1] = e; 
-        l++;
+
+        if(vetor[menor] < vetor[i])
+        {
+            swap(&vetor[menor], &vetor[i]);
+            k++; 
+        }
+        
     }
-    
     *troca = k;
     *comp = l;
 }
