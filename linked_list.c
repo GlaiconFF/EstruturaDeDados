@@ -74,3 +74,17 @@ void print_LL(LinkedList *L)
     }
     printf("NULL\n");
 }
+
+int main()
+{
+    LinkedList *lista;
+    LinkedList_create(lista);
+    add_first(lista, 1);
+    add_first(lista, 0);
+    add_last(lista, 2);
+
+    print_LL(lista);
+
+
+    return 0;
+}
